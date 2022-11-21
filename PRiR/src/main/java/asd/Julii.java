@@ -9,6 +9,10 @@ public class Julii extends Thread {
     final static int CUTOFF = 350;
     final static double CX = -0.4;
     final static double CY = 0.6;
+    final static double CX1 = -0.390541;
+    final static double CY1 = -0.586788;
+    final static double CX2 = 0.25393;
+    final static double CY2 = 0.00048;
     final static double zoom = 2;
     static int[][] set = new int[N][N];
     public static void main(String[] args) throws Exception {
@@ -65,14 +69,6 @@ public class Julii extends Thread {
             begin = 0;
             end = (N / 4) * 1;
         }
-        else if (me == 1) {
-            begin = (N / 4) * 1;
-            end = (N / 4) * 2;
-        }
-        else if (me == 2) {
-            begin = (N / 4) * 2;
-            end = (N / 4) * 3;
-        }
         else if (me == 3) {
             begin = (N / 4) * 3;
             end = N;
@@ -89,6 +85,43 @@ public class Julii extends Thread {
                     k++;
                 }
                 set[i][j] = k;
+            }
+        }
+
+        if (me == 1) {
+            begin = (N / 4) * 1;
+            end = (N / 4) * 2;
+            for (int i = begin; i < end; i++) {
+                for (int j = 0; j < N; j++) {
+                    double zx = 1.5 * (i - end / 2) / (0.5 * zoom * N);
+                    double zy = (j - end / 2) / (0.5 * zoom * N);
+                    int k = 0;
+                    while (zx * zx + zy * zy < 4 && k < CUTOFF) {
+                        double tmp = zx * zx - zy * zy + CX1;
+                        zy = 2.0 * zx * zy + CY1;
+                        zx = tmp;
+                        k++;
+                    }
+                    set[i][j] = k;
+                }
+            }
+        }
+        if (me == 2) {
+            begin = (N / 4) * 2;
+            end = (N / 4) * 3;
+            for (int i = begin; i < end; i++) {
+                for (int j = 0; j < N; j++) {
+                    double zx = 1.5 * (i - end / 2) / (0.5 * zoom * N);
+                    double zy = (j - end / 2) / (0.5 * zoom * N);
+                    int k = 0;
+                    while (zx * zx + zy * zy < 4 && k < CUTOFF) {
+                        double tmp = zx * zx - zy * zy + CX2;
+                        zy = 2.0 * zx * zy + CY2;
+                        zx = tmp;
+                        k++;
+                    }
+                    set[i][j] = k;
+                }
             }
         }
     }
