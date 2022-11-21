@@ -1,21 +1,24 @@
 package asd;
 class MC {
-    public float getRandomNumber(int min, int max) {
+    public float getRandomNumber(float min, float max) {
         return (float) ((Math.random() * (max - min)) + min);
     }
 }
 class Watek extends Thread {
     float Po = 0;
     float Pk = 0;
-    float rnd;
+    float wys;
+    float szer;
+    float R = 4;
     public void run() {
         MC mc = new MC();
-        for (int i = 0; i < 1000; i++) {
-            rnd = mc.getRandomNumber(0, 2);
-            if (rnd < 1) {
-                Pk += 1;
+        for (int i = 0; i < 10000; i++) {
+            wys = mc.getRandomNumber(-R, R);
+            szer = mc.getRandomNumber(-R, R);
+            if (wys * wys + szer * szer <= R * R) {
+                Po += 1;
             }
-            else Po += 1;
+            else Pk += 1;
         }
         System.out.println(Po/Pk);
     }
@@ -30,12 +33,12 @@ class MonteCarlo {
         w3.start();
         Watek w4 = new Watek();
         w4.start();
+        System.out.println("Pole koła według algorytmu Monte Carlo:");
         try {
             w1.join();
             w2.join();
             w3.join();
             w4.join();
-            System.out.println("Watki skonczyly prace");
         }
         catch (Exception e) {
             e.printStackTrace();
