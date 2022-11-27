@@ -18,7 +18,6 @@ public class jHTTPServer {
         }
         String document = "<html>\r\n" +
                 "<body><br>\r\n" +
-                "<background-color=green>" +
                 "<h1><center><font color=blue>Zadanie 6\r\n" +
                 "</font></center></h1>\r\n" +
                 "<h3>Serwer na watkach</h3><hr>\r\n" +

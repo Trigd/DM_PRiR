@@ -15,8 +15,8 @@ class Obraz1 extends Thread {
             image = ImageIO.read(input);
             width = image.getWidth();
             height = image.getHeight();
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
+            for (int i = 0; i < height; i = i+2) {
+                for (int j = 0; j < width; j = j+3) {
                     Color c = new Color(image.getRGB(j, i));
                     int red = (int) (c.getRed());
                     int green = (int) (c.getGreen());
@@ -28,8 +28,8 @@ class Obraz1 extends Thread {
                     image.setRGB(j, i, newColor.getRGB());
                 }
             }
-            File ouptut = new File("gray.jpg");
-            ImageIO.write(image, "jpg", ouptut);
+            File output = new File("gray.jpg");
+            ImageIO.write(image, "jpg", output);
         } catch (Exception e) {
         }
     }
@@ -59,8 +59,8 @@ class Obraz1 extends Thread {
                         image.setRGB(j, i, newColor.getRGB());
                     }
                 }
-                File ouptut = new File("changed.jpg");
-                ImageIO.write(image, "jpg", ouptut);
+                File output = new File("changed.jpg");
+                ImageIO.write(image, "jpg", output);
             } catch (Exception e) {
             }
         }
